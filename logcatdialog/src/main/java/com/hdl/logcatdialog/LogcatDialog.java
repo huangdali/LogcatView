@@ -153,7 +153,7 @@ public class LogcatDialog extends Dialog {
     public String searchTag = "";//过滤tag
 
     public LogcatDialog(@NonNull Context context) {
-        this(context,R.style.dialog);
+        super(context);
         initView();
         new Thread(new Runnable() {
             @Override
