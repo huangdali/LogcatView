@@ -14,6 +14,28 @@
     - **W**  警告级别的内容
     - **E**  错误级别的内容
 
+## 集成
+
+### Step 1. Add the JitPack repository to your build file
+
+Add it in your root build.gradle at the end of repositories:
+
+```java
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://www.jitpack.io' }
+    }
+}
+```
+
+### Step 2. Add the dependency
+
+```java
+dependencies {
+        compile 'com.github.huangdali:LogcatView:v1.0.1'
+}
+```
 
 ## 效果图
 ![](https://github.com/huangdali/LogcatView/blob/master/all.png)
