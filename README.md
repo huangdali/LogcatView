@@ -1,4 +1,4 @@
-# LogcatView
+# LogcatView [![](https://www.jitpack.io/v/huangdali/LogcatView.svg)](https://www.jitpack.io/#huangdali/LogcatView)
 
 日志记录抓取
 
@@ -33,7 +33,7 @@ allprojects {
 
 ```java
 dependencies {
-        compile 'com.github.huangdali:LogcatView:v1.0.1'
+        compile 'com.github.huangdali:LogcatView:v1.0.2'
 }
 ```
 
@@ -45,5 +45,5 @@ dependencies {
 
 ## 版本记录
 
-v1.0.1 ([2017.09.30]())
+v1.0.2 ([2017.09.30]())
 - 【新增】项目初始化
