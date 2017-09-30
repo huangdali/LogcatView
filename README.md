@@ -33,7 +33,7 @@ allprojects {
 
 ```java
 dependencies {
-        compile 'com.github.huangdali:LogcatView:v1.0.2'
+        compile 'com.github.huangdali:LogcatView:v1.0.3'
 }
 ```
 
@@ -50,5 +50,5 @@ dependencies {
 
 ## 版本记录
 
-v1.0.2 ([2017.09.30]())
+v1.0.3 ([2017.09.30]())
 - 【新增】项目初始化
