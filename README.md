@@ -37,6 +37,11 @@ dependencies {
 }
 ```
 
+### 使用
+```java
+    new LogcatDialog(this).show();
+```
+
 ## 效果图
 ![](https://github.com/huangdali/LogcatView/blob/master/all.png)
 
