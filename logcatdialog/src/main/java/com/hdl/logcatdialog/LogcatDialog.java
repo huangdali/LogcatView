@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -152,7 +153,7 @@ public class LogcatDialog extends Dialog {
     public String searchTag = "";//过滤tag
 
     public LogcatDialog(@NonNull Context context) {
-        super(context);
+        this(context,R.style.dialog);
         initView();
         new Thread(new Runnable() {
             @Override
@@ -178,6 +179,10 @@ public class LogcatDialog extends Dialog {
                 }
             }
         }).start();
+    }
+
+    public LogcatDialog(@NonNull Context context, @StyleRes int themeResId) {
+        super(context, themeResId);
     }
 
     /**
@@ -283,7 +288,7 @@ public class LogcatDialog extends Dialog {
         int height = wm.getDefaultDisplay().getHeight();
         Window dialogWindow = getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = width; // 宽度
+        lp.width = width* 7 / 8; // 宽度
         lp.height = height * 7 / 8; // 高度
         dialogWindow.setAttributes(lp);
     }
