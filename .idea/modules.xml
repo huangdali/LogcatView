@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LogcatView.iml" filepath="$PROJECT_DIR$/LogcatView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/logcatdialog/logcatdialog.iml" filepath="$PROJECT_DIR$/logcatdialog/logcatdialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logcatdialog/logcatdialog.iml" filepath="$PROJECT_DIR$/logcatdialog/logcatdialog.iml" />
     </modules>
   </component>
 </project>
