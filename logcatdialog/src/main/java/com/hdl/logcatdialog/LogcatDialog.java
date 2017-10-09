@@ -200,10 +200,10 @@ public class LogcatDialog extends Dialog {
     }
 
     private void showLine(String line, String color) {
-        if (line.contains("http")) {
+        if (line.contains("http://")||line.contains("https://")) {
             String url = line.substring(line.indexOf("http"));
             tvLog.append(Html.fromHtml("<font color='" + color + "'>" + line.substring(0, line.indexOf("http")) + "</font>"));
-            tvLog.append(Html.fromHtml("<font color='#0f0'><a href='" + url + "'>" + url + "</a></font>"));
+            tvLog.append(Html.fromHtml("<a href='" + url + "'>" + url + "</a>"));
         } else {
             tvLog.append(Html.fromHtml("<font color='" + color + "'>" + line + "</font>"));
         }

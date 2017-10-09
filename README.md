@@ -34,7 +34,7 @@ allprojects {
 
 ```java
 dependencies {
-        compile 'com.github.huangdali:LogcatView:v1.0.9'
+        compile 'com.github.huangdali:LogcatView:v1.1.2'
 }
 ```
 
@@ -50,6 +50,11 @@ dependencies {
 ![](https://github.com/huangdali/LogcatView/blob/master/search.png)
 
 ## 版本记录
+
+v1.1.2 ([2017.10.09]())
+
+- 【优化】更精确的网页链接判断
+- 【优化】链接颜色使用默认值
 
 v1.0.9 ([2017.10.09]())
 
