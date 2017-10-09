@@ -5,6 +5,7 @@
 > 没有数据线的时候，就用这个输出日志吧
 
 - 使用简单，一行代码搞定
+- 点击链接可以用浏览器打开
 - 可抓取大部分Android Studio中Logcat打印的内容
 - 可以搜索内容
 - 可按tag过滤
@@ -61,3 +62,24 @@ v1.0.8 ([2017.10.09]())
 v1.0.5 ([2017.09.30]())
 
 - 【新增】项目初始化
+
+## 关于样式
+
+【**如果你的activity继承至AppCompatActivity，请跳过此步骤**】如果你的Activity不是继承至AppCompatActivity，那么样式可能会很丑，可以通过下面的设置：
+
+
+### 1、在style.xml中定义
+```java
+  <style name="Translucent_NoTitle" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item> <!-- 设置自定义布局的背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>  <!-- 设置window背景透明，也就是去边框 -->
+  </style>
+```
+
+### 2、设置主题
+
+```java
+  LogcatDialog logcatDialog = new LogcatDialog(mContext,R.style.Translucent_NoTitle);
+  logcatDialog.show();
+```
+
