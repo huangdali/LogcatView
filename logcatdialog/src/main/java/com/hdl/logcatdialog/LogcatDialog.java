@@ -154,6 +154,10 @@ public class LogcatDialog extends Dialog {
 
     public LogcatDialog(@NonNull Context context) {
         super(context);
+        init();
+    }
+
+    private void init() {
         initView();
         new Thread(new Runnable() {
             @Override
@@ -183,6 +187,7 @@ public class LogcatDialog extends Dialog {
 
     public LogcatDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
+        init();
     }
 
     /**
@@ -205,8 +210,8 @@ public class LogcatDialog extends Dialog {
         }
     }
 
-    float y1 = 0;
-    float y2 = 0;
+    private float y1 = 0;
+    private float y2 = 0;
 
     private void initView() {
         View view = View.inflate(getContext(), R.layout.logcat_dialog, null);
@@ -288,7 +293,7 @@ public class LogcatDialog extends Dialog {
         int height = wm.getDefaultDisplay().getHeight();
         Window dialogWindow = getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = width* 7 / 8; // 宽度
+        lp.width = width * 7 / 8; // 宽度
         lp.height = height * 7 / 8; // 高度
         dialogWindow.setAttributes(lp);
     }
