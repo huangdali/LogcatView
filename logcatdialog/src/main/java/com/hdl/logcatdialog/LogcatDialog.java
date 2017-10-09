@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -75,6 +76,39 @@ public class LogcatDialog extends Dialog {
     };
     private RadioGroup rgGrade;
 
+    private void init() {
+        initView();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Process logcatProcess = null;
+                BufferedReader bufferedReader = null;
+                StringBuilder log = new StringBuilder();
+                String line;
+                try {
+                    while (isRuning) {
+                        logcatProcess = Runtime.getRuntime().exec("logcat");
+                        bufferedReader = new BufferedReader(new InputStreamReader(logcatProcess.getInputStream()));
+                        while ((line = bufferedReader.readLine()) != null) {
+                            log.append(line);
+                            Message message = mHandler.obtainMessage();
+                            message.what = WHAT_NEXT_LOG;
+                            message.obj = line;
+                            mHandler.sendMessage(message);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public LogcatDialog(@NonNull Context context, @StyleRes int themeResId) {
+        super(context, themeResId);
+        init();
+    }
+
     /**
      * 设置搜索的内容(默认没有)
      *
@@ -124,26 +158,54 @@ public class LogcatDialog extends Dialog {
         if (showGrade == 0 || showGrade == 1) {
             if (line.contains(" E ")) {
                 tvLog.append("\n\n");
-                tvLog.append(Html.fromHtml("<font color='red'>" + line + "</font>"));
+                showError(line);
             } else if (line.contains(" W ")) {
                 tvLog.append("\n\n");
-                tvLog.append(Html.fromHtml("<font color='#ba8a27'>" + line + "</font>"));
+                showWarning(line);
             } else {
                 tvLog.append("\n\n" + line);
             }
         } else if (showGrade == 2) {
             if (line.contains(" W ")) {
                 tvLog.append("\n\n");
-                tvLog.append(Html.fromHtml("<font color='#ba8a27'>" + line + "</font>"));
+                showWarning(line);
             }
         } else if (showGrade == 3) {
             if (line.contains(" E ")) {
                 tvLog.append("\n\n");
-                tvLog.append(Html.fromHtml("<font color='red'>" + line + "</font>"));
+                showError(line);
             }
         }
         if (isAutoFullScroll) {
             refreshLogView();
+        }
+    }
+
+    /**
+     * 显示警告级别的日志
+     *
+     * @param line
+     */
+    private void showWarning(String line) {
+        showLine(line, "#ba8a27");
+    }
+
+    /**
+     * 显示错误级别的信息
+     *
+     * @param line
+     */
+    private void showError(String line) {
+        showLine(line, "red");
+    }
+
+    private void showLine(String line, String color) {
+        if (line.contains("http")) {
+            String url = line.substring(line.indexOf("http"));
+            tvLog.append(Html.fromHtml("<font color='" + color + "'>" + line.substring(0, line.indexOf("http")) + "</font>"));
+            tvLog.append(Html.fromHtml("<font color='#0f0'><a href='" + url + "'>" + url + "</a></font>"));
+        } else {
+            tvLog.append(Html.fromHtml("<font color='" + color + "'>" + line + "</font>"));
         }
     }
 
@@ -157,38 +219,6 @@ public class LogcatDialog extends Dialog {
         init();
     }
 
-    private void init() {
-        initView();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Process logcatProcess = null;
-                BufferedReader bufferedReader = null;
-                StringBuilder log = new StringBuilder();
-                String line;
-                try {
-                    while (isRuning) {
-                        logcatProcess = Runtime.getRuntime().exec("logcat");
-                        bufferedReader = new BufferedReader(new InputStreamReader(logcatProcess.getInputStream()));
-                        while ((line = bufferedReader.readLine()) != null) {
-                            log.append(line);
-                            Message message = mHandler.obtainMessage();
-                            message.what = WHAT_NEXT_LOG;
-                            message.obj = line;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    public LogcatDialog(@NonNull Context context, @StyleRes int themeResId) {
-        super(context, themeResId);
-        init();
-    }
 
     /**
      * 关闭任务
@@ -248,6 +278,7 @@ public class LogcatDialog extends Dialog {
         });
         tvLog = (TextView) view.findViewById(R.id.tv_consol);
         tvLog.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tvLog.setMovementMethod(LinkMovementMethod.getInstance());
         tvLog.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

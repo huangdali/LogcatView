@@ -24,8 +24,8 @@ public class Main2Activity extends AppCompatActivity {
                 System.out.println("sys----" + i);
                 Log.v("tj", "111111111111-" + i);
                 Log.d("hyd", "00000000000000---------" + i);
-                Log.w("lv", "onCreate(MainActivity.java:42):" + i);
-                Log.e("lcl", "onCreate(MainActivity.java:43):" + i);
+                Log.w("lv", "onCreate(MainActivity.java:42):https://www.baidu.com/title=" + i);
+                Log.e("lcl", "onCreate(MainActivity.java:43):https://www.baidu.com");
             }
         }, 0, 1000);
         Log.e("hdltag", "onCreate(Main2Activity.java:29):大哥");
